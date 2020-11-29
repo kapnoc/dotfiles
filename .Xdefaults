@@ -1,0 +1,28 @@
+
+*.font: xft:Hack-Regular:pixelsize=14:antialias=true
+*.boldFont: xft:Hack-Regular:pixelsize=14:antialias=true
+*.italicFont: xft:Hack-Regular:pixelsize=14:antialias=true
+*.boldItalicFont: xft:Hack-Regular:pixelsize=14:antialias=true
+
+URxvt.buffered               :  true
+
+! Enable url and mouseless text selection
+URxvt*perl-ext-common        :  default,url-select,keyboard-select,resize-font
+URxvt*url-select.launcher    :  /usr/bin/xdg-open
+URxvt*url-select.underline   :  true
+URxvt*keysym.M-u             :  perl:url-select:select_next
+URxvt*keysym.M-Escape        :  perl:keyboard-select:activate
+URxvt*keysym.M-s             :  perl:keyboard-select:search
+
+! Allow large maximum line length
+URxvt*saveLines              :  65535
+
+URxvt*cursorBlink            :  true
+URxvt*scrollBar              :  false
+! Do not scroll with output
+URxvt*scrollTtyOutput        :  false
+! Scroll in relation to buffer
+URxvt*scrollWithBuffer       :  true
+! Scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress      :  true
+
