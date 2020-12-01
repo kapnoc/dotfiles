@@ -1,4 +1,5 @@
 
+URxvt.letterSpace: -1
 *.font: xft:Hack-Regular:pixelsize=14:antialias=true
 *.boldFont: xft:Hack-Regular:pixelsize=14:antialias=true
 *.italicFont: xft:Hack-Regular:pixelsize=14:antialias=true
