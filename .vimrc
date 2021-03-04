@@ -13,6 +13,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
+" style
+Plug 'arcticicestudio/nord-vim'
+
 " js/ts/...
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
@@ -28,8 +31,10 @@ let g:coc_global_extensions = [
 
 call plug#end()
 
+
 " snippets
 let g:UltiSnipsExpandTrigger="<tab>"
+
 
 " coc
 " if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
@@ -38,4 +43,8 @@ let g:UltiSnipsExpandTrigger="<tab>"
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
+
+
+" style
+colorscheme nord
 
