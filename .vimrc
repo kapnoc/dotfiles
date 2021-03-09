@@ -40,9 +40,11 @@ let g:UltiSnipsExpandTrigger="<tab>"
 " if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
 "   let g:coc_global_extensions += ['coc-prettier']
 " endif
-if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  let g:coc_global_extensions += ['coc-eslint']
-endif
+"
+" disabled eslint in favor of xo
+" if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+"   let g:coc_global_extensions += ['coc-eslint']
+" endif
 
 " coc shortcuts
 nnoremap <silent> gK :call CocAction('doHover')<CR>
@@ -55,6 +57,7 @@ nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
 nmap <leader>do <Plug>(coc-codeaction)
 nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>xo :!npx xo --fix %<CR>
 
 
 " style
