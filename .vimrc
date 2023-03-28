@@ -6,20 +6,29 @@ endif
 
 call plug#begin()
 
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
+Plug 'yggdroot/indentline'
+Plug 'kien/ctrlp.vim'
+Plug 'mbbill/undotree'
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
+Plug 'vim-airline/vim-airline'
+
 " style
-Plug 'arcticicestudio/nord-vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 " js/ts/...
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+
+" html
+Plug 'mattn/emmet-vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
@@ -59,7 +68,60 @@ nmap <leader>do <Plug>(coc-codeaction)
 nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>xo :!npx xo --fix %<CR>
 
+let g:ctrlp_custom_ignore = 'node_modules'
+
+if has("persistent_undo")
+   let target_path = expand('~/.vimundo')
+
+    " create the directory and any parent directories
+    " if the location does not exist.
+    if !isdirectory(target_path)
+        call mkdir(target_path, "p", 0700)
+    endif
+
+    let &undodir=target_path
+    set undofile
+endif
 
 " style
-colorscheme nord
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+syntax on
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
+set t_Co=256
+colorscheme onehalfdark
+let g:airline_theme='onehalfdark'
+let g:lightline = { 'colorscheme': 'onehalfdark' }
+
+" select last paste in visual mode
+nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
+
+filetype plugin indent on
+
+" js/ts/...
+autocmd Filetype javascript setlocal ts=2 sw=2 expandtab
+autocmd Filetype typescript setlocal ts=2 sw=2 expandtab
+autocmd Filetype json setlocal ts=2 sw=2 expandtab
+autocmd Filetype typescriptreact setlocal ts=2 sw=2 expandtab
+autocmd Filetype html setlocal ts=2 sw=2 expandtab
+autocmd Filetype htmldjango setlocal ts=2 sw=2 expandtab
+autocmd Filetype scss setlocal ts=2 sw=2 expandtab
+autocmd Filetype css setlocal ts=2 sw=2 expandtab
+autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab
+
+" PYTHON PROVIDERS {{{
+
+if has('macunix')
+
+" OSX
+
+	let g:python3_host_prog = '/opt/homebrew/bin/python3' " -- Set python 3 provider
+
+	let g:python_host_prog = '/opt/homebrew/bin/python2' " --- Set python 2 provider
+
+endif
 
