@@ -35,7 +35,8 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-html',
   \ 'coc-json',
-  \ 'coc-pyright'
+  \ 'coc-pyright',
+  \ 'coc-rust-analyzer'
   \ ]
 
 call plug#end()
@@ -116,6 +117,9 @@ autocmd Filetype htmldjango setlocal ts=2 sw=2 expandtab
 autocmd Filetype scss setlocal ts=2 sw=2 expandtab
 autocmd Filetype css setlocal ts=2 sw=2 expandtab
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab
+
+" rust
+
 
 " PYTHON PROVIDERS {{{
 
