@@ -57,7 +57,7 @@ alias gs='git status'
 # less used aliases
 wttr()
 {
-	curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Nancy}"
+	curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Kontula}"
 }
 
 PATH="$PATH:$HOME/.local/bin"

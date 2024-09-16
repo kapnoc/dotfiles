@@ -46,16 +46,17 @@ let g:UltiSnipsExpandTrigger="<tab>"
 
 
 " coc
-" if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-"   let g:coc_global_extensions += ['coc-prettier']
-" endif
-"
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
 " disabled eslint in favor of xo
-" if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-"   let g:coc_global_extensions += ['coc-eslint']
-" endif
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
 
 " coc shortcuts
+inoremap <silent><expr> <C-y>y coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 nnoremap <silent> gK :call CocAction('doHover')<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -103,6 +104,7 @@ nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 filetype plugin indent on
 
 set conceallevel=0
+let g:indentLine_setConceal = 0
 
 " js/ts/...
 autocmd Filetype javascript setlocal ts=2 sw=2 expandtab
@@ -127,3 +129,4 @@ if has('macunix')
 
 endif
 
+" lua require('init')
