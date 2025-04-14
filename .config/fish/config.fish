@@ -25,8 +25,12 @@ if status is-interactive
 
 	export PATH="$PATH:/Users/kapnoc/pkg/flutter/bin"
 
+	export PATH=":$HOME/.cargo/bin:$PATH:$HOME/.local/bin"
+
 	export EDITOR='nvim'
 	export PAGER='less -R'
+
+	export GPG_TTY=(tty)
 
 	# common use aliases
 	alias ..='cd ..'
@@ -47,6 +51,12 @@ if status is-interactive
 	alias gpl='git pull'
 	alias gps='git push'
 	alias gs='git status'
+
+	function wttr -a location
+		set -q location[1]; or set location "Helsinki"
+		curl -H "Accept-Language: $LANG" "wttr.in/$location?u"
+	end
+
 
 	# less used aliases
 	# wttr()
