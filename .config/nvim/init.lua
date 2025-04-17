@@ -25,6 +25,7 @@ Plug('neoclide/coc.nvim', {['branch'] = 'release'})
 
 -- style
 Plug 'loctvl842/monokai-pro.nvim'
+Plug 'eliseshaffer/darklight.nvim'
 
 vim.call('plug#end')
 
@@ -73,8 +74,29 @@ vim.keymap.set('n', '<leader>fb', fzflua.buffers, { desc = 'fzf-lua buffers' })
 
 -- style
 vim.g.t_Co = 256
-vim.cmd.colorscheme('monokai-pro-light')
+require("monokai-pro").setup({
+  transparent_background = true,
+  filter = "pro"
+})
+vim.cmd.colorscheme('monokai-pro')
 vim.g.lightline = { colorscheme = 'monokaipro', mode_map = { n = 'N', i = 'I', R = 'R', v = 'V', V = 'VL', c = 'C', s = 'S', S = 'SL', t = 'T' }, active = { left = { { 'mode', 'paste' }, { 'readonly', 'relativepath', 'modified' } } } }
+require('darklight').setup({
+  mode = 'custom',
+  light_mode_callback = function()
+    require("monokai-pro").setup({
+      transparent_background = false,
+      filter = "light", -- classic | octagon | pro | machine | ristretto | spectrum
+    })
+  end,
+  dark_mode_callback = function()
+    require("monokai-pro").setup({
+      transparent_background = true,
+      filter = "pro", -- classic | octagon | pro | machine | ristretto | spectrum
+    })
+  end
+})
+vim.cmd([[nmap <leader>dl :DarkLightSwitch<CR>]])
+
 
 -- select last paste in visual mode
 vim.cmd([[nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]']])
@@ -99,7 +121,5 @@ autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab
 
 
 
-
-
-
-
+-- TeX
+vim.cmd([[nmap <leader>bb :!./build.sh<CR>]])
