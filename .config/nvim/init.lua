@@ -21,7 +21,7 @@ Plug 'peitalin/vim-jsx-typescript'
 -- html
 Plug 'mattn/emmet-vim'
 
-Plug('neoclide/coc.nvim', {['branch'] = 'release'})
+Plug 'neovim/nvim-lspconfig'
 
 -- style
 Plug 'loctvl842/monokai-pro.nvim'
@@ -29,32 +29,19 @@ Plug 'eliseshaffer/darklight.nvim'
 
 vim.call('plug#end')
 
+-- nvim lsp
+-- needed language servers:
+-- npm install -g typescript typescript-language-server
+-- npm i -g vscode-langservers-extracted
+vim.lsp.enable('ts_ls')
+-- vim.lsp.enable('eslint')
+vim.lsp.enable('html')
+vim.lsp.enable('jsonls')
 
-vim.g.coc_global_extensions = { 'coc-tsserver', 'coc-html', 'coc-json', 'coc-pyright' }
-
--- coc
-vim.cmd([[if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  let g:coc_global_extensions += ['coc-prettier']
-endif]])
-
--- disabled eslint in favor of xo
-vim.cmd([[if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  let g:coc_global_extensions += ['coc-eslint']
-endif]])
-
--- coc shortcuts
-vim.cmd([[inoremap <silent><expr> <C-y>y coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]])
-vim.cmd([[nnoremap <silent> gK :call CocAction('doHover')<CR>]])
-vim.cmd([[nmap <silent> gd <Plug>(coc-definition)]])
-vim.cmd([[nmap <silent> gy <Plug>(coc-type-definition)]])
-vim.cmd([[nmap <silent> gr <Plug>(coc-references)]])
-vim.cmd([[nmap <silent> [g <Plug>(coc-diagnostic-prev)]])
-vim.cmd([[nmap <silent> ]g <Plug>(coc-diagnostic-next)]])
-vim.cmd([[nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>]])
-vim.cmd([[nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>]])
-vim.cmd([[nmap <leader>do <Plug>(coc-codeaction)]])
-vim.cmd([[nmap <leader>rn <Plug>(coc-rename)]])
-vim.cmd([[nmap <leader>xo :!npx xo --fix %<CR>]])
+vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
+vim.keymap.set("n", "<leader>do", vim.lsp.buf.code_action, {})
 
 
 local fzflua = require('fzf-lua')
